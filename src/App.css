@@ -1,9 +1,9 @@
 #root {
     display: flex;
-    height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: scroll;
 }
 
 input::-webkit-outer-spin-button,
@@ -21,13 +21,21 @@ section {
     text-align: center;
 }
 
-input {
-    width: 20px;
-    margin: 0 5px;
-    text-align: center;
+section label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-button:first-child {
+section label span {
+    margin: 3px 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+section label button:first-child {
     margin-left: 50px;
 }
 
@@ -35,3 +43,48 @@ button[type=submit] {
     width: 100%;
     padding: 1em;
 }
+
+/*Order form*/
+form#orderForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+form#orderForm label {
+    position: relative;
+
+}
+
+form#orderForm input {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+form#orderForm input[type=radio] {
+    margin-bottom: 0;
+    width: auto;
+}
+
+.frequentionHolder {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+form#orderForm .frequentionHolder label {
+    margin-bottom: 0;
+}
+
+label#remarksId {
+    margin-bottom: 20px;
+}
+
+textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
