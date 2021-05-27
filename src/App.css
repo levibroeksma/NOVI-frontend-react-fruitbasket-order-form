@@ -4,6 +4,51 @@
     justify-content: center;
     align-items: center;
     overflow: scroll;
+    padding: 30px 0;
+    background: #CDB4DB;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.page-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-width: 1100px;
+    justify-content: space-between;
+}
+
+.fruit-counter,
+form#orderForm {
+    width: calc(50% - 15px);
+    box-shadow: 5px 5px 9px 5px rgba(255,175,204,0.3);
+}
+
+.fruit-counter {
+    background: #BDE0FE;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 39px;
+    box-sizing: border-box;
+}
+
+form#orderForm {
+    background: #A2D2FF;
+    padding: 39px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+img {
+    width: 100%;
+    max-width: 1200px;
+}
+
+h2 {
+    margin-top: 0;
 }
 
 input::-webkit-outer-spin-button,
@@ -12,55 +57,55 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/*   Section   */
+
 section {
     border: 2px solid black;
-    width: 300px;
+    width: 100%;
     padding: 30px;
     margin-bottom: 20px;
     border-radius: 8px;
-    text-align: center;
+    box-sizing: border-box;
 }
 
-section label {
+section {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-section label span {
-    margin: 3px 10px;
+.fruit-holder {
+    display: flex;
+    flex-direction: row;
 }
 
-button {
-    cursor: pointer;
+.fruit-holder h2 {
+    margin:  0 30px 0 0;
 }
 
-section label button:first-child {
-    margin-left: 50px;
+.fruit-holder button {
+    height: 30px;
 }
 
-button[type=submit] {
-    width: 100%;
-    padding: 1em;
+.fruit-holder span {
+    margin: 5px 10px 0 10px
 }
 
-/*Order form*/
+/*   FORM   */
+
 form#orderForm {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
     max-width: 500px;
     position: relative;
-}
-
-form#orderForm label {
-    position: relative;
-
+    justify-content: space-between;
 }
 
 form#orderForm input {
-    margin-bottom: 20px;
     width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
 }
 
 form#orderForm input[type=radio] {
@@ -68,23 +113,86 @@ form#orderForm input[type=radio] {
     width: auto;
 }
 
+input#frequentionAndersId {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+
+/*   Radiobuttons   */
+
 .frequentionHolder {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    width: 100%;
+}
+
+form#orderForm #termsAndConditionsId {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+}
+
+form#orderForm input[type="checkbox"]{
+    width: auto;
+}
+
+textarea {
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    width: 100%;
+}
+
+/*   Labels   */
+
+form#orderForm label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+label#firstNameId,
+label#lastNameId
+{
+    width: calc(50% - 10px);
 }
 
 form#orderForm .frequentionHolder label {
     margin-bottom: 0;
 }
 
-label#remarksId {
+form#orderForm label#remarksId {
     margin-bottom: 20px;
 }
 
-textarea {
-    margin-bottom: 20px;
-    padding: 10px;
-    box-sizing: border-box;
+form#orderForm label#ageId {
+    width: 100%;
 }
 
+form#orderForm label#remarksId {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+label#postalCodeId,
+label#houseNumberId,
+label#houseNumberAdditionId {
+    width: calc(100% / 3 - 15px);
+}
+/*Errormessage*/
+
+.errorMessage {
+    color: red;
+    font-size: 10px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1250px) {
+    #root {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,20 @@
+button {
+    cursor: pointer;
+    background: #CDB4DB;
+    border: 0;
+    border-radius: 30px;
+    color: #fff;
+}
+
+button:hover {
+    background: #b69ac5;
+}
+
+button[type=submit] {
+    width: 100%;
+    padding: 1em;
+}
+
+section label button:first-child {
+    margin-left: 50px;
+}
