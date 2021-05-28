@@ -2,13 +2,17 @@ import React, {useState} from 'react';
 import './App.css';
 import { useForm } from "react-hook-form";
 import Header from "./components/Header/Header";
-import headerImage from "./assets/screenshot-logo.png"
+import headerImage from "./assets/screenshot-logo.png";
 import Button from "./components/Button/Button";
+import InputText from "./components/InputText/InputText";
+import Checkbox from "./components/Checkbox/Checkbox";
+import TextArea from "./components/TextArea/TextArea";
 
 function App() {
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
     const onSubmit = data => console.log(data);
     const selectedRadio = watch('frequention');
+
     const [countStrawberry, setCountStrawberry] = useState(0);
     const [countBanana, setCountBanana] = useState(0);
     const [countApple, setCountApple] = useState(0);
@@ -113,37 +117,17 @@ function App() {
                 {/*CONTACT FORMULIER*/}
 
                 <form id="orderForm" onSubmit={handleSubmit(onSubmit)}>
+                    <InputText name="firstName" nameId="firstNameId" errors={errors} register={register} required={true} placeholder="Voornaam..." />
 
-                    <label htmlFor="firstName" id="firstNameId">
-                        <input type="text" name="firstName" id="firstName" placeholder="Voornaam..."{...register("firstName", {required: true})}/>
-                        {errors.firstName && errors.firstName.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                    </label>
+                    <InputText name="lastName" nameId="lastNameId" errors={errors} register={register} required={true} placeholder="Voornaam..." />
 
-                    <label htmlFor="lastName" id="lastNameId">
-                        <input type="text" placeholder="Achternaam..." name="lastName" id="lastName" {...register("lastName", {required: true})}/>
-                        {errors.lastName && errors.lastName.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                    </label>
+                    <InputText name="age" errors={errors} register={register} nameId="ageId" required={true} minAge={18} placeholder="Leeftijd..." />
 
-                    <label htmlFor="age" id="ageId">
-                        <input type="number" placeholder="Leeftijd..." name="age" id="age" {...register("age", {required: true, min: 18})}/>
-                        {errors.age && errors.age.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                        {errors.age && errors.age.type === "min" && <span className="errorMessage">Je moet minimaal 18 jaar zijn als je een bestelling wilt plaatsen.</span>}
-                    </label>
+                    <InputText name="postalCode" nameId="postalCodeId" register={register} errors={errors} required={true} placeholder="Postcode..." patternPostalCode={/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i} />
 
-                    <label htmlFor="postalCode" id="postalCodeId">
-                        <input type="text" placeholder="Postcode..." {...register("postalCode", {required: true, pattern: /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i})} />
-                        {errors.postalCode && errors.postalCode.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                        {errors.postalCode && errors.postalCode.type === "pattern" && <span className="errorMessage">Voer een geldige postcode in.</span>}
-                    </label>
+                    <InputText name="houseNumber" nameId="houseNumberId" register={register} errors={errors} required={true} placeholder="Huisnummer..."/>
 
-                    <label htmlFor="houseNumber"  id="houseNumberId" >
-                        <input type="number" name="houseNumber" id="houseNumber" placeholder="Huisnummer..." {...register("houseNumber",{required: true})}/>
-                        {errors.houseNumber && errors.houseNumber.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                    </label>
-
-                    <label htmlFor="houseNumberAddition" id="houseNumberAdditionId">
-                        <input type="text" id="houseNumberAddition" placeholder="Toevoeging..." {...register("houseNumberAddition")}/>
-                    </label>
+                    <InputText name="houseNumberAddition" nameId="houseNumberAdditionId" register={register} errors={errors} placeholder="Toevoeging..."/>
 
                     <div className="frequentionHolder">
                         <h2>Bezorgfrequentie</h2>
@@ -165,28 +149,60 @@ function App() {
                         )}
                         {errors.frequentionAnders && errors.frequentionAnders.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
                     </div>
-
                     {errors.frequention && errors.frequention.type === "required" && <span className="errorMessage">Je moet een keuze maken.</span>}
-                    <label htmlFor="remarks" id="remarksId">Opmerking:</label>
-                    <textarea name="remarks" id="remarks" cols="30" rows="10" placeholder="Uw vraag of opmerking ... " {...register("remarks", {required: true, maxLength: 500})}></textarea>
-                    {errors.remarks && errors.remarks.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}
-                    {errors.remarks && errors.remarks.type === "maxLength" && <span className="errorMessage">Dit veld mag maximaal 500 tekens bevatten.</span>}
 
-                    <label htmlFor="termsAndConditions" id="termsAndConditionsId">
-                        <input type="checkbox" name="termsAndConditions" {...register("termsAndConditions", {required: true})}/> Ik ga akkoord met de Algemene Voorwaarden.
-                    </label>
-                    {errors.termsAndConditions && errors.termsAndConditions.type === "required" && <span className="errorMessage">Accepteer de algemene voorwaarden om verder te gaan.</span>}
+                    <TextArea name="remarks" nameId="remarksId" errors={errors} register={register} placeholder="Uw vraag of opmerking." maxTextLength={500} labelContent="Opmerkingen:" required={true} />
 
-                    <Button
-                        type="submit"
-                        title="Verzend"
-                    />
+                    <Checkbox name="termsAndConditions" nameId="termsAndConditionsId" register={register} errors={errors} required={true} />
+
+                    <Button type="submit" title="Verzend" />
                 </form>
             </div>
-
-
         </>
     );
 }
 
 export default App;
+
+// OUDE CODE
+
+{/*<label htmlFor="firstName" id="firstNameId">*/}
+{/*    <input type="text" name="firstName" id="firstName" placeholder="Voornaam..."{...register("firstName", {required: true})}/>*/}
+{/*    {errors.firstName && errors.firstName.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*</label>*/}
+
+{/*<label htmlFor="lastName" id="lastNameId">*/}
+{/*    <input type="text" placeholder="Achternaam..." name="lastName" id="lastName" {...register("lastName", {required: true})}/>*/}
+{/*    {errors.lastName && errors.lastName.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*</label>*/}
+
+{/*<label htmlFor="age" id="ageId">*/}
+{/*    <input type="number" placeholder="Leeftijd..." name="age" id="age" {...register("age", {required: true, min: 18})}/>*/}
+{/*    {errors.age && errors.age.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*    {errors.age && errors.age.type === "min" && <span className="errorMessage">Je moet minimaal 18 jaar zijn als je een bestelling wilt plaatsen.</span>}*/}
+{/*</label>*/}
+
+{/*<label htmlFor="postalCode" id="postalCodeId">*/}
+{/*    <input name="postalCode" type="text" placeholder="Postcode..." {...register("postalCode", {required: true, pattern: /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i})} />*/}
+{/*    {errors.postalCode && errors.postalCode.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*    {errors.postalCode && errors.postalCode.type === "pattern" && <span className="errorMessage">Voer een geldige postcode in.</span>}*/}
+{/*</label>*/}
+
+{/*<label htmlFor="houseNumber"  id="houseNumberId" >*/}
+{/*    <input type="number" name="houseNumber" id="houseNumber" placeholder="Huisnummer..." {...register("houseNumber",{required: true})}/>*/}
+{/*    {errors.houseNumber && errors.houseNumber.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*</label>*/}
+
+{/*<label htmlFor="houseNumberAddition" id="houseNumberAdditionId">*/}
+{/*    <input type="text" id="houseNumberAddition" placeholder="Toevoeging..." {...register("houseNumberAddition")}/>*/}
+{/*</label>*/}
+
+{/*<label htmlFor="remarks" id="remarksId">Opmerking:</label>*/}
+{/*<textarea name="remarks" id="remarks" cols="30" rows="10" placeholder="Uw vraag of opmerking..." {...register("remarks", {required: true, maxLength: 500})}></textarea>*/}
+{/*{errors.remarks && errors.remarks.type === "required" && <span className="errorMessage">Dit veld is verplicht.</span>}*/}
+{/*{errors.remarks && errors.remarks.type === "maxLength" && <span className="errorMessage">Dit veld mag maximaal 500 tekens bevatten.</span>}*/}
+
+{/*<label htmlFor="termsAndConditions" id="termsAndConditionsId">*/}
+{/*    <input type="checkbox" name="termsAndConditions" {...register("termsAndConditions", {required: true})}/> Ik ga akkoord met de Algemene Voorwaarden.*/}
+{/*</label>*/}
+{/*{errors.termsAndConditions && errors.termsAndConditions.type === "required" && <span className="errorMessage">Accepteer de algemene voorwaarden om verder te gaan.</span>}*/}
